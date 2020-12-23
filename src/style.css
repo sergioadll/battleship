@@ -1,1 +1,23 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+.col {
+  width: auto;
+}
+.xAxis {
+  background: chocolate;
+  margin-left: 1rem;
+}
+.xAxis__num {
+  background: beige;
+  height: 2rem;
+  width: 2rem;
+}
+span {
+  width: 2rem;
+}
+.cell {
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  background: blueviolet;
+  cursor: pointer;
+}
