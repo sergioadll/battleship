@@ -35,5 +35,11 @@ window.onload = function() {
 };
 
 function fire(e) {
-  console.log(e.target.value);
+    if (e.target.value == 1) {
+        e.target.style.background = "red";
+        e.target.value = 2;
+        e.target.innerHTML = 2;
+    } else if (e.target.value == 0) {
+        e.target.style.background = "blue";
+    }
 }
