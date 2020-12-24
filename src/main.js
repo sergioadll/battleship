@@ -77,7 +77,7 @@ function dig(rowDiv) {
   if (rowDiv.value == 1) {
     rowDiv.value = 2;
     rowDiv.style.background = "lightgreen";
-    rowDiv.innerHTML = '<i class="far fa-money-bill-alt"></i>';
+    rowDiv.innerHTML = '<i class="far fa-money-bill-alt fa-lg"></i>';
     money++;
     billsFound++;
     console.log(billsFound);
@@ -92,7 +92,7 @@ function dig(rowDiv) {
     rowDiv.style.background = "#a84a14";
   } else if (rowDiv.value == 3) {
     rowDiv.style.background = "red";
-    rowDiv.innerHTML = '<i class="fas fa-bomb"></i>';
+    rowDiv.innerHTML = '<i class="fas fa-bomb fa-lg"></i>';
     deaths++;
     let deathsDiv = document.querySelector(".deaths");
     deathsDiv.innerHTML = deaths;
