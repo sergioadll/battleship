@@ -1,21 +1,34 @@
 /* eslint-disable */
 import "bootstrap";
 import "./style.css";
-
 let gameBoard = [
-  [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [1, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [1, 1, 1, 1, 0, 0, 0, 0, 0, 0]
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
-
+let money = 0;
+let billQuantity = 5;
+let billsFound = 0;
+let deaths = 0;
 window.onload = function() {
+  initializeBoard();
+  let buttonDiv = document.querySelector(".button");
+  buttonDiv.addEventListener("click", () => {
+    document.querySelector(".money").innerHTML = 0;
+    document.querySelector(".deaths").innerHTML = 0;
+    endGame();
+  });
+};
+function initializeBoard() {
+  setBoard();
+  billsFound = 0;
   let row = document.querySelectorAll(".yAxis"); //traemos todas las filas (array) del tablero por su clase
   for (let i = 0; i < row.length; i++) {
     //recorremos todas las filas
@@ -23,23 +36,66 @@ window.onload = function() {
       //recorremos cada celda del tablero/matriz "gameBoard"
       let cell = document.createElement("div"); //creamos cada cell y añadimos la classe cell para css
       cell.classList.add("cell");
-      cell.innerHTML = gameBoard[i][j];
+      // cell.innerHTML = gameBoard[i][j];
       cell.value = gameBoard[i][j]; //aqui asignamos a cada celda el valor correspondiente del tablero. Ejemplo: gameboard[2][3]=0  ->  fila 2, clolumna 3
 
       cell.addEventListener("click", e => {
-        fire(e);
+        dig(e.target);
       });
       row[i].appendChild(cell);
     }
   }
-};
+}
+function setBoard() {
+  let row = Math.floor(Math.random() * 9);
+  let col = Math.floor(Math.random() * 9);
+  for (let i = 0; i < billQuantity; i++) {
+    gameBoard[Math.floor(Math.random() * 9)][Math.floor(Math.random() * 9)] = 1;
+  }
+  gameBoard[row][col] = 3;
+}
 
-function fire(e) {
-    if (e.target.value == 1) {
-        e.target.style.background = "red";
-        e.target.value = 2;
-        e.target.innerHTML = 2;
-    } else if (e.target.value == 0) {
-        e.target.style.background = "blue";
+function endGame() {
+  let previousGame = document.querySelectorAll(".cell");
+  previousGame.forEach(cell => cell.remove());
+  gameBoard = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
+  initializeBoard();
+}
+function dig(rowDiv) {
+  if (rowDiv.value == 1) {
+    rowDiv.value = 2;
+    rowDiv.style.background = "lightgreen";
+    rowDiv.innerHTML = '<i class="far fa-money-bill-alt"></i>';
+    money++;
+    billsFound++;
+    console.log(billsFound);
+
+    let moneyEarnedDiv = document.querySelector(".money");
+    moneyEarnedDiv.innerHTML = money;
+    if (billsFound == billQuantity) {
+      alert("You won!");
+      endGame();
     }
+  } else if (rowDiv.value == 0) {
+    rowDiv.style.background = "#a84a14";
+  } else if (rowDiv.value == 3) {
+    rowDiv.style.background = "red";
+    rowDiv.innerHTML = '<i class="fas fa-bomb"></i>';
+    deaths++;
+    let deathsDiv = document.querySelector(".deaths");
+    deathsDiv.innerHTML = deaths;
+    alert("You died!");
+    endGame();
+  }
 }
