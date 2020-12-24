@@ -1,4 +1,8 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+body {
+  background: darkslategray;
+  color: white;
+}
 .col {
   width: auto;
 }
@@ -16,8 +20,16 @@ span {
   padding: 0;
   width: 2rem;
   height: 2rem;
-  background: #c55717;
+  background: sandybrown;
+  border: 1px solid darkslategray;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+}
+.stats {
+  font-size: 1.5rem;
 }
 .button {
   cursor: pointer;

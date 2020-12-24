@@ -14,7 +14,8 @@ let gameBoard = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 let money = 0;
-let billQuantity = 5;
+let billQuantity = 20;
+let bombQuantity = 2;
 let billsFound = 0;
 let deaths = 0;
 window.onload = function() {
@@ -47,12 +48,12 @@ function initializeBoard() {
   }
 }
 function setBoard() {
-  let row = Math.floor(Math.random() * 9);
-  let col = Math.floor(Math.random() * 9);
   for (let i = 0; i < billQuantity; i++) {
     gameBoard[Math.floor(Math.random() * 9)][Math.floor(Math.random() * 9)] = 1;
   }
-  gameBoard[row][col] = 3;
+  for (let i = 0; i < bombQuantity; i++) {
+    gameBoard[Math.floor(Math.random() * 9)][Math.floor(Math.random() * 9)] = 3;
+  }
 }
 
 function endGame() {
