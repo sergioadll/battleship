@@ -77,7 +77,7 @@ function dig(rowDiv) {
   if (rowDiv.value == 1) {
     rowDiv.value = 2;
     rowDiv.style.background = "lightgreen";
-    rowDiv.innerHTML = '<i class="far fa-money-bill-alt fa-lg"></i>';
+    rowDiv.innerHTML = '<i class="fas fa-dollar-sign fa-lg"></i>';
     money++;
     billsFound++;
     console.log(billsFound);
